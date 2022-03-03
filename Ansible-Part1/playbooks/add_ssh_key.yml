@@ -1,0 +1,16 @@
+- hosts: leafs_DC1, leafs_DC2
+#  gather_facts: no
+  tasks:
+  - name: Add User
+    eos_user:
+      name: automator 
+      nopassword: yes
+      privilege: 15
+      role: network-admin
+      state: present
+  - name: Add SSH key
+    eos_user:
+      name: automator
+      sshkey: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+      # sshkey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdPsjeoOPjkOvZvnPZIey2aTmS+KC6sypEfpSB6amsm9gacNfM3h2M//JJmXHw1sI8ilYYAI8WyC52y7M+ElHY+WCP/RFKDB4BPhay6iCip5RTfh2IidpQ1cGNCifB/r2gd7qIJ00ddQZelhAP5XE0LDQqL8p/kTfxGsxFtPpjDEyaoqVyessh6eEYK1P/q68JQgUbOjJsL8NsupUOkbhHZUhtqbQC+kxH/xcYQH98hr/1mlEOcado8d9aCT/9qq74mDn3FFMCd7pDyJFv8HUnOTcHe4Ksmiegkqa33DIAkwUjOX+W64t5asBNilR8bq5MHlFPXNaGAdXvdHD0+VmD arista@l5-20220228-15-0e6aeee4"
+      state: present
