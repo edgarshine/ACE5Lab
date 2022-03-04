@@ -1,0 +1,225 @@
+spine1-DC1:
+  Interfaces:
+    Loopback0: 
+      ipv4: 192.168.101.101
+      type: l3
+    Ethernet2:
+      ipv4: 192.168.103.1
+      type: port
+    Ethernet3:
+      ipv4: 192.168.103.7
+      type: port
+    Ethernet4:
+      ipv4: 192.168.103.13
+      type: port
+    Ethernet5:
+      ipv4: 192.168.103.19
+      type: port
+    Ethernet6:
+      ipv4: 192.168.103.25
+      type: port
+    Ethernet7:
+      ipv4: 192.168.103.31
+      type: port
+
+spine2-DC1:
+    Loopback0:
+      ipv4: 192.168.101.102
+      type: l3
+    Ethernet2:
+      ipv4: 192.168.103.3
+      type: port
+    Ethernet3:
+      ipv4: 192.168.103.9
+      type: port
+    Ethernet4:
+      ipv4: 192.168.103.15
+      type: port
+    Ethernet5:
+      ipv4: 192.168.103.21
+      type: port
+    Ethernet6:
+      ipv4: 192.168.103.27
+      type: port
+    Ethernet7:
+      ipv4: 192.168.103.33
+      type: port
+
+spine3-DC1:
+    Loopback0:
+      ipv4: 192.168.101.103
+      type: l3
+    Ethernet2:
+      ipv4: 192.168.103.5
+      type: port
+    Ethernet3:
+      ipv4: 192.168.103.11
+      type: port
+    Ethernet4:
+      ipv4: 192.168.103.17
+      type: port
+    Ethernet5:
+      ipv4: 192.168.103.23
+      type: port
+    Ethernet6:
+      ipv4: 192.168.103.29
+      type: port
+    Ethernet7:
+      ipv4: 192.168.103.35
+      type: port
+
+leaf1-DC1:
+    Loopback0:
+      ipv4: 192.168.101.11
+      type: l3
+    Loopback1:
+      ipv4: 192.168.102.11
+      type: l3
+    Ethernet3:
+      ipv4: 192.168.103.0
+      type: port
+    Ethernet4:
+      ipv4: 192.168.103.2
+      type: port
+    Ethernet5:
+      ipv4: 192.168.103.4
+      type: port
+
+#    spine-peers:
+#
+#        192.168.103.1
+#
+#        192.168.103.3
+#
+#        192.168.103.5
+
+leaf2-DC1:
+    Loopback0:
+      ipv4: 192.168.101.12
+      type: l3
+    Loopback1:
+      ipv4: 192.168.102.11
+      type: l3
+    Ethernet3:
+      ipv4: 192.168.103.6
+      type: port
+    Ethernet4:
+      ipv4: 192.168.103.8
+      type: port
+    Ethernet5:
+      ipv4: 192.168.103.10
+      type: port
+
+#    spine-peers:
+#
+#        192.168.103.7
+#
+#        192.168.103.9
+#
+#        192.168.103.11
+
+leaf3-DC1:
+    Loopback0:
+      ipv4: 192.168.101.13
+      type: l3
+    Loopback1:
+      ipv4: 192.168.102.13
+      type: l3
+    Ethernet3:
+      ipv4: 192.168.103.12
+      type: port
+    Ethernet4:
+      ipv4: 192.168.103.14
+      type: port
+    Ethernet5:
+      ipv4: 192.168.103.16
+      type: port
+
+#    spine-peers:
+#
+#        192.168.103.13
+#
+#        192.168.103.15
+#
+#        192.168.103.17
+
+leaf4-DC1:
+    Loopback0:
+      ipv4: 192.168.101.14
+      type: l3
+    Loopback1:
+      ipv4: 192.168.102.13
+      type: l3
+    Ethernet3:
+      ipv4: 192.168.103.18
+      type: port
+    Ethernet4:
+      ipv4: 192.168.103.20
+      type: port
+    Ethernet5:
+      ipv4: 192.168.103.22
+      type: port
+
+#    spine-peers:
+#
+#        192.168.103.19
+#
+#        192.168.103.21
+#
+#        192.168.103.23
+
+borderleaf1-DC1:
+    Loopback:
+      ipv4: 192.168.101.21
+      type: l3
+    Loopback1:
+      ipv4: 192.168.102.21
+      type: l3
+    Ethernet3:
+      ipv4: 192.168.103.24
+      type: port
+    Ethernet4:
+      ipv4: 192.168.103.26
+      type: port
+    Ethernet5:
+      ipv4: 192.168.103.28
+      type: port
+    Ethernet12:
+      ipv4: 192.168.254.0
+      type: port
+
+#    spine-peers:
+#
+#        192.168.103.25
+#
+#        192.168.103.27
+#
+#        192.168.103.29
+
+borderleaf2-DC1:
+    Loopback:
+      ipv4: 192.168.102.22
+      type: l3
+    Loopback1:
+      ipv4: 192.168.102.21
+      type: l3
+    Ethernet3:
+      ipv4: 192.168.103.30
+      type: port
+    Ethernet4:
+      ipv4: 192.168.103.32
+      type: port
+    Ethernet5:
+      ipv4: 192.168.103.34
+      type: port
+    Ethernet12:
+      ipv4: 192.168.254.2
+      type: port
+
+#    spine-peers:
+#
+#        192.168.103.31
+#
+#        192.168.103.33
+#
+#        192.168.103.35
