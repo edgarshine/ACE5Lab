@@ -1,0 +1,29 @@
+leaf1-DC1:
+    spine1-DC1: 192.168.103.1
+    spine2-DC1: 192.168.103.3
+    spine3-DC1: 192.168.103.5
+
+leaf2-DC1:
+    spine1-DC1: 192.168.103.7
+    spine2-DC1: 192.168.103.9
+    spine3-DC1: 192.168.103.11
+
+leaf3-DC1:
+    spine1-DC1: 192.168.103.13
+    spine2-DC1: 192.168.103.15
+    spine3-DC1: 192.168.103.17
+
+leaf4-DC1:
+    spine1-DC1: 192.168.103.19
+    spine2-DC1: 192.168.103.21
+    spine3-DC1: 192.168.103.23
+
+borderleaf1-DC1:
+    spine1-DC1: 192.168.103.25
+    spine2-DC1: 192.168.103.27
+    spine3-DC1: 192.168.103.29
+
+borderleaf2-DC1:
+    spine1-DC1: 192.168.103.31
+    spine2-DC1: 192.168.103.33
+    spine3-DC1: 192.168.103.35

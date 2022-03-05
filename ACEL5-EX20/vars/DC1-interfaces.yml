@@ -85,14 +85,6 @@ leaf1-DC1:
       ipv4: 192.168.103.4
       type: port
 
-#    spine-peers:
-#
-#        192.168.103.1
-#
-#        192.168.103.3
-#
-#        192.168.103.5
-
 leaf2-DC1:
     Loopback0:
       ipv4: 192.168.101.12
@@ -109,14 +101,6 @@ leaf2-DC1:
     Ethernet5:
       ipv4: 192.168.103.10
       type: port
-
-#    spine-peers:
-#
-#        192.168.103.7
-#
-#        192.168.103.9
-#
-#        192.168.103.11
 
 leaf3-DC1:
     Loopback0:
@@ -135,14 +119,6 @@ leaf3-DC1:
       ipv4: 192.168.103.16
       type: port
 
-#    spine-peers:
-#
-#        192.168.103.13
-#
-#        192.168.103.15
-#
-#        192.168.103.17
-
 leaf4-DC1:
     Loopback0:
       ipv4: 192.168.101.14
@@ -159,14 +135,6 @@ leaf4-DC1:
     Ethernet5:
       ipv4: 192.168.103.22
       type: port
-
-#    spine-peers:
-#
-#        192.168.103.19
-#
-#        192.168.103.21
-#
-#        192.168.103.23
 
 borderleaf1-DC1:
     Loopback:
@@ -188,14 +156,6 @@ borderleaf1-DC1:
       ipv4: 192.168.254.0
       type: port
 
-#    spine-peers:
-#
-#        192.168.103.25
-#
-#        192.168.103.27
-#
-#        192.168.103.29
-
 borderleaf2-DC1:
     Loopback:
       ipv4: 192.168.102.22
@@ -215,11 +175,3 @@ borderleaf2-DC1:
     Ethernet12:
       ipv4: 192.168.254.2
       type: port
-
-#    spine-peers:
-#
-#        192.168.103.31
-#
-#        192.168.103.33
-#
-#        192.168.103.35
