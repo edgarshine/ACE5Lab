@@ -1,0 +1,12 @@
+{# This template creates the interfaces database entries #}
+{% for interface in underlay_interfaces[inventory_hostname]['interfaces'] %}
+interface {{ interface}}
+{% if underlay_interfaces[inventory_hostname]['interfaces'][interface]['type'] == 'uplink' %}
+    no switchport
+{% set interface_netmask = '31' %}
+{% endif %}
+{% if underlay_interfaces[inventory_hostname]['interfaces'][interface]['type'] == 'loopback' %}
+{% set interface_netmask = '32' %}
+{% endif %}
+    ip address {{ underlay_interfaces[inventory_hostname]['interfaces'][interface]['ipv4'] }}/{{ interface_netmask }}
+{% endfor %}

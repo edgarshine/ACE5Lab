@@ -1,5 +1,5 @@
 ---
-- hosts: right_leafs_DC1
+- hosts: leaf1-DC1
   gather_facts: no
   tasks:
   - name: Register variables

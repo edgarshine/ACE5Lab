@@ -1,0 +1,12 @@
+---
+- hosts: leaf1-DC1
+  gather_facts: no
+  tasks:
+  - name: Register variables
+    include_vars:
+      file: "{{lookup('env','PWD')}}/vars/DC1-interfaces.yml"
+      name: underlay_interfaces
+  - name: Create interfaces
+    template:
+      src: "{{ lookup('env','PWD') }}/templates/interfaces.j2"
+      dest: "{{ lookup('env','PWD') }}/configs/{{ inventory_hostname }}-interfaces.cfg"
