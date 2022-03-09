@@ -4,7 +4,7 @@
   tasks:
   - name: Register variables
     include_vars:
-      file: "{{lookup('env','PWD')}}/vars/DC1-interfaces.yml"
+      file: "{{ lookup('env','PWD') }}/vars/DC1-interfaces.yml"
       name: underlay_interfaces
   - name: Create interfaces
     template:

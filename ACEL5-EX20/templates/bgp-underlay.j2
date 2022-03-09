@@ -1,45 +1,43 @@
 {# This template creates the BGP underlay database entries #}
-{% for asn in bgp_underlay_peers[inventory_hostname]['asn'] %}
 ip prefix-list LOOPBACK
 {% for interface in underlay_interfaces[inventory_hostname]['interfaces'] %}
 {% if 'Loopback'in interface %}
-{{ interface }}
+    {{ interface }}
 {% endif %}
 {% endfor %}
 route-map LOOPBACK permit 10
-match ip address prefix-list LOOPBACK
-{% if 'spine' in {{ inventory_hostname }} %}
+    match ip address prefix-list LOOPBACK
+{% if 'spine' in inventory_hostname %}
 peer-filter LEAF-AS-RANGE
-10 match as-range 65000-65535 result accept
+    10 match as-range 65000-65535 result accept
 {% endif %}
-router bgp {{ asn }}}}
-router-id {{ underlay_interfaces[inventory_hostname]['interfaces']['Loopback0']['ipv4'] }}
-no bgp default ipv4-unicast
-maximum-paths 3
-distance bgp 20 200 200
-{% if 'spine' in {{ inventory_hostname }} %}
-bgp listen range 192.168.0.0/16 peer-group LEAF_Underlay peer-filter LEAF-AS-RANGE
-neighbor LEAF_Underlay peer group
-neighbor LEAF_Underlay send-community
-neighbor LEAF_Underlay maximum-routes 12000
-neighbor LEAF_Underlay activate
-{% elif 'leaf' in {{ inventory_hostname }} %}
-neighbor SPINE_Underlay peer group
-neighbor SPINE_Underlay remote-as {{ bgp_underlay_peers[inventory_hostname]['remote-asn'] }}
-neighbor SPINE_Underlay send-community
-neighbor SPINE_Underlay maximum-routes 12000
-neighbor LEAF_Peer peer group
-neighbor LEAF_Peer remote-as {{ asn }}
-neighbor LEAF_Peer next-hop-self
-neighbor LEAF_Peer maximum-routes 12000
-{% The FOR statement must start here for a list of Spine peers %}
+router bgp {{ bgp_underlay_peers[inventory_hostname]['asn'] }}
+    router-id {{ underlay_interfaces[inventory_hostname]['interfaces']['Loopback0']['ipv4'] }}
+    no bgp default ipv4-unicast
+    maximum-paths 3
+    distance bgp 20 200 200
+{% if 'spine' in inventory_hostname %}
+    bgp listen range 192.168.0.0/16 peer-group LEAF_Underlay peer-filter LEAF-AS-RANGE
+    neighbor LEAF_Underlay peer group
+    neighbor LEAF_Underlay send-community
+    neighbor LEAF_Underlay maximum-routes 12000
+    neighbor LEAF_Underlay activate
+{% elif 'leaf' in inventory_hostname %}
+    neighbor SPINE_Underlay peer group
+    neighbor SPINE_Underlay remote-as {{ bgp_underlay_peers[inventory_hostname]['remote-asn'] }}
+    neighbor SPINE_Underlay send-community
+    neighbor SPINE_Underlay maximum-routes 12000
+    neighbor LEAF_Peer peer group
+    neighbor LEAF_Peer remote-as {{ bgp_underlay_peers[inventory_hostname]['asn'] }}
+    neighbor LEAF_Peer next-hop-self
+    neighbor LEAF_Peer maximum-routes 12000
+{# The FOR statement must start here for a list of Spine peers
 # List the neighbor IPs here. It should be three spines for SPINE_Underlay and one LEAF_Peer
 # format: neighbor <ip> peer group SPINE
-{% This is where the neighbor FOR loop must close %}
-neighbor SPINE_Underlay activate
-neighbor LEAF_Peer activate
+ This is where the neighbor FOR loop must close #} 
+    neighbor SPINE_Underlay activate
+    neighbor LEAF_Peer activate
 {% endif %}
-redistribute connected route-map LOOPBACK
-address-family ipv4
-redistribute connected route-map LOOPBACK
-{% endfor %}
+    redistribute connected route-map LOOPBACK
+    address-family ipv4
+        redistribute connected route-map LOOPBACK

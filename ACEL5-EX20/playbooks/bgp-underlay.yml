@@ -1,0 +1,16 @@
+---
+- hosts: leaf1-DC1
+  gather_facts: no
+  tasks:
+  - name: Register Interface variables
+    include_vars:  
+      file: "{{ lookup('env','PWD') }}/vars/DC1-interfaces.yml"
+      name: underlay_interfaces
+  - name: Register BGP variables
+    include_vars:
+      file: "{{ lookup('env','PWD') }}/vars/DC1-BGP-peers.yml"
+      name: bgp_underlay_peers
+  - name: Create BGP Underlay
+    template:
+      src: "{{ lookup('env','PWD') }}/templates/bgp-underlay.j2"
+      dest: "{{ lookup('env','PWD') }}/configs/{{ inventory_hostname }}-bgp-underlay.cfg"
