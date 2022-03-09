@@ -3,67 +3,51 @@ leaf1-DC1:
     asn: 65101
     remote-asn: 65100
     peers:
-        # spine1-DC1:
-        - 192.168.103.1
-        # spine2-DC1:
-        - 192.168.103.3
-        # spine3-DC1:
-        - 192.168.103.5
+        spine1-DC1: 192.168.103.1
+        spine2-DC1: 192.168.103.3
+        spine3-DC1: 192.168.103.5
+        leaf2-DC1: 10.255.252.1
 
 leaf2-DC1:
     asn: 65101
     remote-asn: 65100
     peers:
-        # spine1-DC1:
-        -  192.168.103.7
-        # spine2-DC1:
-        - 192.168.103.9
-        # spine3-DC1:
-        - 192.168.103.11
+        spine1-DC1:  192.168.103.7
+        spine2-DC1: 192.168.103.9
+        spine3-DC1: 192.168.103.11
+        leaf2-DC1: 10.255.252.1
 
 leaf3-DC1:
     asn: 65102
     remote-asn: 65100
     peers:
-        # spine1-DC1:
-        - 192.168.103.13
-        # spine2-DC1:
-        - 192.168.103.15
-        # spine3-DC1:
-        - 192.168.103.17
+        spine1-DC1: 192.168.103.13
+        spine2-DC1: 192.168.103.15
+        spine3-DC1: 192.168.103.17
 
 leaf4-DC1:
     asn: 65102
     remote-asn: 65100
     peers:
-        # spine1-DC1:
-        - 192.168.103.19
-        # spine2-DC1:
-        - 192.168.103.21
-        # spine3-DC1:
-        - 192.168.103.23
+        spine1-DC1: 192.168.103.19
+        spine2-DC1: 192.168.103.21
+        spine3-DC1: 192.168.103.23
 
 borderleaf1-DC1:
     asn: 65103
     remote-asn: 65100
     peers:
-        # spine1-DC1:
-        - 192.168.103.25
-        # spine2-DC1:
-        - 192.168.103.27
-        # spine3-DC1:
-        - 192.168.103.29
+        spine1-DC1: 192.168.103.25
+        spine2-DC1: 192.168.103.27
+        spine3-DC1: 192.168.103.29
 
 borderleaf2-DC1:
     asn: 65103
     remote-asn: 65100
     peers:
-        # spine1-DC1:
-        - 192.168.103.31
-        # spine2-DC1:
-        - 192.168.103.33
-        # spine3-DC1:
-        - 192.168.103.35
+        spine1-DC1: 192.168.103.31
+        spine2-DC1: 192.168.103.33
+        spine3-DC1: 192.168.103.35
 
 spine1-DC1:
     asn: 65100
