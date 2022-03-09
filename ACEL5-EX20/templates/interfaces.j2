@@ -3,6 +3,7 @@
 interface {{ interface}}
 {% if underlay_interfaces[inventory_hostname]['interfaces'][interface]['type'] == 'uplink' %}
     no switchport
+    mtu 9214
 {% set interface_netmask = '31' %}
 {% endif %}
 {% if underlay_interfaces[inventory_hostname]['interfaces'][interface]['type'] == 'loopback' %}

@@ -2,7 +2,7 @@
 ip prefix-list LOOPBACK
 {% for interface in underlay_interfaces[inventory_hostname]['interfaces'] %}
 {% if 'Loopback'in interface %}
-    {{ interface }}
+    permit {{ underlay_interfaces[inventory_hostname]['interfaces'][interface]['ipv4'] }}/32
 {% endif %}
 {% endfor %}
 route-map LOOPBACK permit 10
@@ -21,7 +21,10 @@ router bgp {{ bgp_underlay_peers[inventory_hostname]['asn'] }}
     neighbor LEAF_Underlay peer group
     neighbor LEAF_Underlay send-community
     neighbor LEAF_Underlay maximum-routes 12000
-    neighbor LEAF_Underlay activate
+    redistribute connected route-map LOOPBACK
+    address-family ipv4
+        neighbor LEAF_Underlay activate
+        redistribute connected route-map LOOPBACK
 {% elif 'leaf' in inventory_hostname %}
     neighbor SPINE_Underlay peer group
     neighbor SPINE_Underlay remote-as {{ bgp_underlay_peers[inventory_hostname]['remote-asn'] }}
@@ -35,9 +38,9 @@ router bgp {{ bgp_underlay_peers[inventory_hostname]['asn'] }}
 # List the neighbor IPs here. It should be three spines for SPINE_Underlay and one LEAF_Peer
 # format: neighbor <ip> peer group SPINE
  This is where the neighbor FOR loop must close #} 
-    neighbor SPINE_Underlay activate
-    neighbor LEAF_Peer activate
-{% endif %}
     redistribute connected route-map LOOPBACK
     address-family ipv4
+        neighbor SPINE_Underlay activate
+        neighbor LEAF_Peer activate
         redistribute connected route-map LOOPBACK
+{% endif %}
