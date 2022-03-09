@@ -1,0 +1,11 @@
+---
+- hosts: leaf1-DC1
+  gather_facts: no
+  tasks:
+  - name: Register variables
+    include_vars:
+      file: "{{lookup('env','PWD')}}/vars/DC1-interfaces.yml"
+      name: interfaces
+  - name: Test variables
+    debug:
+      msg: "{{ interfaces }}"
