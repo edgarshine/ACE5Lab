@@ -1,0 +1,31 @@
+from cvplibrary import CVPGlobalVariables, GlobalVariableNames
+import yaml 
+from cvplibrary import RestClient
+import ssl
+
+
+global_vars = CVPGlobalVariables.getValue(GlobalVariableNames.CVP_SYSTEM_LABELS)
+ssl._create_default_https_context = ssl._create_unverified_context
+
+cvp_ip = '192.168.0.5'
+configlet_name = 'VLAN_list'
+for variable in global_vars:
+    item, value = variable.split(':')
+    if item == 'hostname':
+        hostname = value
+vlan_client = RestClient( 'https://' + cvp_ip + 
+                          '/cvpservice/configlet/getConfigletByName.do?name=' +
+                          configlet_name , 'GET' )
+if vlan_client.connect():
+    raw = yaml.load(vlan_client.getResponse())
+
+vlans_data_model = yaml.safe_load(raw['config'])
+
+for device in vlans_data_model:
+    if device == hostname:
+        for vlan_id in vlans_data_model[device]['vlans']:
+            print('vlan ' + str(vlan_id) )
+            print('  name ' + vlans_data_model[device]['vlans'][vlan_id]['name'] )
+            if 'ip' in vlans_data_model[device]['vlans'][vlan_id]:
+                print('interface Vlan' + str( vlan_id) )
+                print('  ip address ' + vlans_data_model[device]['vlans'][vlan_id]['ip'])
