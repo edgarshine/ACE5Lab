@@ -75,10 +75,11 @@ vlan_client = RestClient( 'https\://' + cvp_ip +
                           '/cvpservice/configlet/getConfigletByName.do?name=' +
                           configlet_name , 'GET' )
 if vlan_client.connect():
-    raw = yaml.load(client.getResponse())</pre>
+    raw = yaml.load(client.getResponse())</pre></p>
 
 The raw will have the following dict structure
-<pre>{'reconciled': False,
+<pre>
+{'reconciled': False,
  'netElementCount': 0,
  'editable': True,
  'visible': True,
@@ -94,7 +95,8 @@ The raw will have the following dict structure
  'note': '',
  'type': 'Static',
  'isDefault': 'no',
- 'isAutoBuilder': ''}</pre>
+ 'isAutoBuilder': ''}
+ </pre>
 
 We want to extract only the config contents, a YAML text, but also converted in a
 dict format, so we also do a yaml load on this value.
@@ -121,3 +123,49 @@ And this is how we can iterate: we can push only if the hostname is listed on VL
         for vlan_id in vlans_data_model[device]['vlans']:
             print('vlan ' + str(vlan_id))
             print('  name ' + vlans_data_model[device]['vlans'][vlan_id]['name'] )</pre>
+
+This creates the vlan config lines:
+<pre>
+vlan 100
+    name: Customer100
+</pre>
+Which is not that useful, after all we can just copy and paste these lines.
+However, let's assume some VLANs have SVIs and others don't have. Although SVIs are 
+configure in different config section - it's on the interface section - they are 
+attached to a VLAN.
+A Yaml list can be like that:
+<pre>VLAN_List
+leaf1-DC1:
+    vlans:
+        100:
+            name: Customer100
+            ip: 192.168.123.1/24
+        200:
+            name: Customer200
+leaf2-DC1:
+    vlans:
+        100:
+            name: Customer100
+        200:
+            name: Customer200</pre></p>
+And we can create a different config section IF the ip field exist on our file,
+with some lines of code:
+<pre>
+for device in vlans_data_model:
+    if device == hostname:
+        for vlan_id in vlans_data_model[device]['vlans']:
+            print('vlan ' + str(vlan_id) )
+            print('  name ' + vlans_data_model[device]['vlans'][vlan_id]['name'] )
+            if 'ip' in vlans_data_model[device]['vlans'][vlan_id]:
+                print('interface Vlan' + str( vlan_id) )
+                print('  ip address ' + vlans_data_model[device]['vlans'][vlan_id]['ip'])
+</pre>
+And this is the result:
+<pre>
+vlan 200
+  name Customer200
+vlan 100
+  name Customer100
+interface Vlan100
+  ip address 192.168.123.1/24
+</pre>
