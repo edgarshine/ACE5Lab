@@ -34,10 +34,13 @@ router bgp {{ bgp_underlay_peers[inventory_hostname]['asn'] }}
     neighbor LEAF_Peer remote-as {{ bgp_underlay_peers[inventory_hostname]['asn'] }}
     neighbor LEAF_Peer next-hop-self
     neighbor LEAF_Peer maximum-routes 12000
-{# The FOR statement must start here for a list of Spine peers
-# List the neighbor IPs here. It should be three spines for SPINE_Underlay and one LEAF_Peer
-# format: neighbor <ip> peer group SPINE
- This is where the neighbor FOR loop must close #} 
+{% for peer,ip in bgp_underlay_peers[inventory_hostname]['peers'].items() %}
+{% if 'spine' in peer %}
+    neighbor {{ ip }} peer group SPINE_Underlay
+{% elif 'leaf' in peer %}
+    neighbor {{ ip }} peer group LEAF_Peer
+{% endif %}
+{% endfor %}
     redistribute connected route-map LOOPBACK
     address-family ipv4
         neighbor SPINE_Underlay activate
